@@ -22,3 +22,4 @@ after_success:
   - docker push fgigante/multi-nginx
   - docker push fgigante/multi-server
   - docker push fgigante/multi-worker
+
