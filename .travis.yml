@@ -19,14 +19,14 @@ after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
   # Add tagging for pushing to DockerHub
-  - docker tag mclient fgigante/multi-client:mclient
-  - docker tag mnginx fgigante/multi-nginx:mnginx
-  - docker tag mserver fgigante/multi-server:mserver
-  - docker tag mworker fgigante/multi-worker:mworker
+  - docker tag fgigante/multi-client aidfgdocker/multi-client
+  - docker tag fgigante/multi-nginx aidfgdocker/multi-nginx
+  - docker tag fgigante/multi-server aidfgdocker/multi-server
+  - docker tag fgigante/multi-worker aidfgdocker/multi-worker
 
   # Take the images and push them to DockerHub
-  - docker push fgigante/multi-client
-  - docker push fgigante/multi-nginx
-  - docker push fgigante/multi-server
-  - docker push fgigante/multi-worker
+  - docker push aidfgdocker/multi-client
+  - docker push aidfgdocker/multi-nginx
+  - docker push aidfgdocker/multi-server
+  - docker push aidfgdocker/multi-worker
 
