@@ -16,8 +16,14 @@ after_success:
   - docker build -t fgigante/multi-server ./server
   - docker build -t fgigante/multi-worker ./worker
   # Login docker CLI
-  #- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+  # Add tagging for pushing to DockerHub
+  - docker tag mclient fgigante/multi-client:mclient
+  - docker tag mnginx fgigante/multi-nginx:mnginx
+  - docker tag mserver fgigante/multi-server:mserver
+  - docker tag mworker fgigante/multi-worker:mworker
+
   # Take the images and push them to DockerHub
   - docker push fgigante/multi-client
   - docker push fgigante/multi-nginx
