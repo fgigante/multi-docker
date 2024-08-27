@@ -15,16 +15,9 @@ after_success:
   - docker build -t fgigante/multi-nginx ./nginx
   - docker build -t fgigante/multi-server ./server
   - docker build -t fgigante/multi-worker ./worker
-  # Login docker CLI
+  # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-
-  # Add tagging for pushing to DockerHub
-  - docker tag fgigante/multi-client aidfgdocker/multi-client
-  - docker tag fgigante/multi-nginx aidfgdocker/multi-nginx
-  - docker tag fgigante/multi-server aidfgdocker/multi-server
-  - docker tag fgigante/multi-worker aidfgdocker/multi-worker
-
-  # Take the images and push them to DockerHub
+  # Take those images and push them to docker hub
   - docker push aidfgdocker/multi-client
   - docker push aidfgdocker/multi-nginx
   - docker push aidfgdocker/multi-server
@@ -32,12 +25,12 @@ after_success:
 
 deploy:
   provider: elasticbeanstalk
-  region: eu-west-3
-  app: multi-docker
-  env: Multi-docker-env
-  bucket_name: elasticbeanstalk-eu-west-3-011528270992
-  bucket_path: docker-multi
+  region: 'eu-west-3'
+  app: 'multi-docker'
+  env: 'MultiDocker-env'
+  bucket_name: 'elasticbeanstalk-eu-west-3-011528270992'
+  bucket_path: 'docker-multi'
   on:
-    branch: master
+    branch: main
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
