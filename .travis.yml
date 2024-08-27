@@ -11,12 +11,14 @@ script:
   - docker run -e CI=true fgigante/react-test npm test
 
 after_success:
-  - docker build -t fgigante/multi-client ./client
-  - docker build -t fgigante/multi-nginx ./nginx
-  - docker build -t fgigante/multi-server ./server
-  - docker build -t fgigante/multi-worker ./worker
-  # Log in to the docker CLI
+# Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+  - docker build -t aidfgdocker/multi-client ./client
+  - docker build -t aidfgdocker/multi-nginx ./nginx
+  - docker build -t aidfgdocker/multi-server ./server
+  - docker build -t aidfgdocker/multi-worker ./worker
+
   # Take those images and push them to docker hub
   - docker push aidfgdocker/multi-client
   - docker push aidfgdocker/multi-nginx
@@ -31,6 +33,6 @@ deploy:
   bucket_name: 'elasticbeanstalk-eu-west-3-011528270992'
   bucket_path: 'docker-multi'
   on:
-    branch: main
+    branch: master
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
